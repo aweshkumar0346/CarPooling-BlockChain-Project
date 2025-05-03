@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Block Chain Project</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Apply background image */
+        body {
+            background-image: url('https://img.freepik.com/premium-vector/muslim-families-go-vacation-using-car_1453-421.jpg?w=996'); /* Replace with your image URL */
+            background-size: cover;
+            background-position: center center;
+            height: 100vh;
+            color: #ffffff; /* White text to contrast with the background */
+            position: relative;
+        }
+
+        /* Dark overlay */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3); /* Adjust the opacity for darker effect */
+            z-index: -1;
+        }
+
+        /* Ensure the content is centered */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            text-align: center;
+        }
+    </style>
+    <script>
+        async function connectWallet() {
+            if (window.ethereum) {
+                try {
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    const account = accounts[0];
+                    window.location.href = `/history?account=${account}`;
+                } catch (err) {
+                    alert("MetaMask connection denied.");
+                }
+            } else {
+                alert("MetaMask not detected. Please install MetaMask.");
+            }
+        }
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary px-4">
+    <a class="navbar-brand" href="#">CarPooling</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/rides">View Rides</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/offer">Offer Ride</a>
+            </li>
+            <li class="nav-item">
+                <button onclick="connectWallet()" class="btn btn-outline-light">View Ride History</button>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container text-center">
+    <div>
+        <h1>Welcome to CarPooling</h1>
+        <p class="lead">A decentralized platform to offer and book rides using blockchain technology.</p>
+        <div class="d-grid gap-2 d-md-block">
+            <a href="/offer" class="btn btn-primary btn-lg">Offer Ride</a>
+            <a href="/rides" class="btn btn-success btn-lg">View Rides</a>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
